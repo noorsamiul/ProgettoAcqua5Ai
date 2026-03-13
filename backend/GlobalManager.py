@@ -1,22 +1,23 @@
 from enum import Enum
+import TimeLapse
 
-class ChoiceEnum(str, Enum):
-    ALL_TO_A = "all to a"
-    ALL_TO_B = "all to b"
-    SHARED   = "shared"
-# #endclass
 
 
 class GlobalManager:
     INSTANCE = None
 
-    def __init__(self):
+    def __init__(self, year):
         GlobalManager.INSTANCE = self
 
         self.choice: ChoiceEnum = None
+        self.time = TimeLapse(year)
     # #enddef
 
     def set_choice(self, choice):
         self.choice = choice
+    # #enddef
+
+    def year_flow(self):
+        self.time.year_flow(self.choice)
     # #enddef
 # #enclass

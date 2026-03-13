@@ -1,3 +1,6 @@
+import GlobalManager
+import ChoiceEnum
+
 class WaterSource:
     INSTANCE = None
 
@@ -7,19 +10,19 @@ class WaterSource:
         self.year_water = 4
 
     #manager acqua villaggio A
-    def get_water_villageA(self):
-        if GlobalManager.INSTANCE.choice == ChoiceEnum.SHARED:
+    def get_water_villageA(self, choice):
+        if choice == ChoiceEnum.SHARED:
             return self.year_water/2
-        elif GlobalManager.INSTANCE.choice == ChoiceEnum.ALL_TO_A:
+        elif choice == ChoiceEnum.ALL_TO_A:
             return self.year_water
         else:
             return 0
 
     #manager acqua villaggio B
-    def get_water_villageB(self):
-        if GlobalManager.INSTANCE.choice == ChoiceEnum.SHARED:
+    def get_water_villageB(self, choice):
+        if choice == ChoiceEnum.SHARED:
             return  self.year_water/2
-        elif GlobalManager.INSTANCE.choice == ChoiceEnum.ALL_TO_B:
+        elif choice == ChoiceEnum.ALL_TO_B:
             return self.year_water
         else:
             return 0
