@@ -155,8 +155,21 @@ class MapScene:
 
             # 2. Dopo un po' che corrono, passiamo al Bad Ending
             if self.timer > 150:
-                from frontend.scenes.bad_ending_scene import BadEnding
-                self.manager.change(BadEnding(self.manager))
+                GlobalManager.INSTANCE.war()
+                GlobalManager.INSTANCE.time.year_flow(GlobalManager.INSTANCE.choice)
+                state.year = GlobalManager.INSTANCE.time.year
+                self.timer = 0
+
+                #if self.losing_village == "A": state.water_a -= 10
+                #if self.losing_village == "B": state.water_b -= 10
+                state.water_a = Village.VILLAGGIO_A.riserva_acqua
+                state.water_b = Village.VILLAGGIO_B.riserva_acqua
+                state.humor_a = Village.VILLAGGIO_A.morale
+                state.humor_b = Village.VILLAGGIO_B.morale
+
+                if Village.VILLAGGIO_A.num_persone == 0 and Village.VILLAGGIO_B.num_persone == 0:
+                    from frontend.scenes.bad_ending_scene import BadEnding
+                    self.manager.change(BadEnding(self.manager))
 
         # FASE 5: Collaborazione (Gli anni volano, l'acqua si equalizza)
         elif self.fase_gioco == "collaborazione":
